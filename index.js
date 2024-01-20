@@ -22,7 +22,7 @@ const html = `
 </head>
 <body>
     <div style="color:red">hettt</div>
-    <button>kkjjhj </button>
+    <button id="open">Открыть</button>
 
     <script src="app.js"></script>
 </body>
@@ -30,13 +30,16 @@ const html = `
 
 
 
-// const javascript =
+const javascript = `
+    const button = document.querySelector('#open')
+    button.addEventListener('click', () => console.log('Hello'))
+`
 
 
 http.createServer((req,res)=> {
     switch (req.url) {
         case '/':
-            res.writeHead (200, {'Content-Type': 'text/css'});
+            res.writeHead (200, {'Content-Type': 'text/html'});
             // res.write('main page') 
             res.end(html)
          
