@@ -1,5 +1,4 @@
-
-
+ 
 
 
 
@@ -10,25 +9,32 @@ const html = `
 <!DOCTYPE html>
 <html lang="en">
 
-<style>
-body {
-    background-color:gray;
-}
-button {
-    color:red;
-}
-</style>
-
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="">
+
 </head>
+
+<style>
+body {
+    background-color:gray;
+  
+}
+h1 {
+    text-align:center;
+}
+#open {
+    color:red;
+}
+div {
+    margin:20px;
+}
+
+</style>
+
 <body>
+    <h1>Мой первый сервер</h1>
     <div style="color:red">hettt</div>
     <button id="open">Открыть</button>
 
@@ -38,34 +44,35 @@ button {
     </script>
 
 </body>
+
 </html>`;
 
 
+    //! <link rel="stylesheet" href="style.css">
 
-
-
+const port = 3000
 
 http.createServer((req,res)=> {
     switch (req.url) {
         case '/':
             res.writeHead (200, {'Content-Type': 'text/html'});
-            res.write('main page') 
-            res.end(html)
+            res.write(html) 
+            res.write('<p>hello world</p> <br>')
+            res.end('main page')
          
-        case '/app.css':
-            res.writeHead (200, {'Content-Type': 'text/css'});
-            res.write('second page ')   
-            res.end(css) 
-        case '/app.js':
-            res.writeHead (200, {'Content-Type': 'text/javascript'});
-            res.write('third page ')   
-            res.end(js) 
+        case '/second':
+            res.writeHead (200, {'Content-Type': 'text/html'});
+            res.write(html)   
+            res.end('<h3>second page 2</h3>') 
+        case '/third':
+            res.writeHead (200, {'Content-Type': 'text/html'});
+            res.write(html)   
+            res.end('third page ') 
         default:
             res.writeHead (404, {'Content-Type': 'text/html'});
-    res.write('Error 404 ')   
-    res.end('end') 
+            res.write('Error 404 ')   
     }
-}).listen(3000, ()=> {
+}).listen(port, ()=> {
     console.log('Success');
 })
 
