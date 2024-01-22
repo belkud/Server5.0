@@ -1,9 +1,12 @@
- 
+
+
+const http = require('http')
+const fs = require('fs')
+// const path = require('path')
+// const mime = require('mime')
 
 
 
-const http = require ('http')
-const fs = require ('fs')
 
 
 const html = `
@@ -16,7 +19,7 @@ const html = `
     <title>Document</title>
     <link rel="icon" href="/public/jspicture.jpg" sizes: "64*64" type="image/jpg">
     
-    </head>
+</head>
     
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap');
@@ -66,23 +69,22 @@ http.createServer((req,res)=> {
     switch (req.url) {
         case '/':
             res.writeHead (200, {'Content-Type': 'text/html'});
-            let data = fs.readFileSync('./addInfo.html', {encoding: 'utf-8', flag:"r"})
+            let data = fs.readFileSync('./firstPage.html', {encoding: 'utf-8', flag:"r"})
             res.write(`${html} ${data}`)
-            // res.write(' <br>')
-        
             
-            res.end('main page')
-
+            res.end('<h3>Main page</h3>')
 
 
         case '/second':
             res.writeHead (200, {'Content-Type': 'text/html'});
-            res.write(html)   
-            res.end('<h3>second page 2</h3>') 
+            res.write(html)
+            let data2 = fs.readFileSync('./secondPage.html')
+            res.write(data2)
+            res.end('<h3>Second page 2</h3>') 
         case '/third':
             res.writeHead (200, {'Content-Type': 'text/html'});
             res.write(html)   
-            res.end('third page ') 
+            res.end('Third page ') 
         default:
             res.writeHead (404, {'Content-Type': 'text/html'});
             res.write('Error 404 ')   
