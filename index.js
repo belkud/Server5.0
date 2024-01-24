@@ -49,7 +49,7 @@ const html = `
 
     <script>
         const button = document.querySelector('#open')
-        button.addEventListener('click', () => alert('Hello'))
+        button.addEventListener('click', () => console.log('Hello'))
     </script>
 
 </body>
@@ -60,31 +60,43 @@ const html = `
     //! <link rel="stylesheet" href="style.css">
 
 const port = 3000
-function staticFile () {
+// function staticFile (res, req) {
+//     res.setHeader(200, {'Content-Type':'image/jpg'});
+//     fs.readFile('./public/jspicture.jpg')
 
-}
+
+// }
+
+// const file = staticFile()
+
+
 
 
 http.createServer((req,res)=> {
     switch (req.url) {
         case '/':
+            res.writeHead(200, {'Content-Type':'image/jpg'});
+             fs.readFile('./public/jspicture.jpg')
+             res.write(`${fs.readFile}`)
+
+
             res.writeHead (200, {'Content-Type': 'text/html'});
             let data = fs.readFileSync('./firstPage.html', {encoding: 'utf-8', flag:"r"})
             res.write(`${html} ${data}`)
-            
             res.end('<h3>Main page</h3>')
-
 
         case '/second':
             res.writeHead (200, {'Content-Type': 'text/html'});
             res.write(html)
-            let data2 = fs.readFileSync('./secondPage.html')
-            res.write(data2)
+            fs.readFile('./secondPage.html')
+            // res.write(data2)
             res.end('<h3>Second page 2</h3>') 
+
         case '/third':
             res.writeHead (200, {'Content-Type': 'text/html'});
             res.write(html)   
             res.end('Third page ') 
+
         default:
             res.writeHead (404, {'Content-Type': 'text/html'});
             res.write('Error 404 ')   
